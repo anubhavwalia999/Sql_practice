@@ -6,7 +6,7 @@ SELECT
   user_id,
   count(tweet_id) as tweet_count_per_user
 FROM tweets
-WHERE tweet_date> '2022-01-01' and tweet_date< '2023-01-01'
+WHERE EXTRACT(YEAR FROM tweet_date) = 2022
 group by user_id) total_tweets
 group by tweet_bucket;
 
