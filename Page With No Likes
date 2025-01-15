@@ -1,0 +1,16 @@
+SELECT page_id FROM pages 
+where page_id not in(SELECT page_id FROM page_likes)
+;
+
+--alternate solutions
+SELECT page_id
+FROM pages
+EXCEPT
+SELECT page_id
+FROM page_likes;
+
+SELECT pages.page_id
+FROM pages
+LEFT OUTER JOIN page_likes AS likes
+  ON pages.page_id = likes.page_id
+WHERE likes.page_id IS NULL;
