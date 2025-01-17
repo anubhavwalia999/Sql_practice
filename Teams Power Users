@@ -1,0 +1,6 @@
+SELECT sender_id,count(content) as message_count FROM messages
+where sent_date>'2022-07-31' and  sent_date<'2022-09-01'
+--0r WHERE EXTRACT(MONTH FROM sent_date) = '8' AND EXTRACT(YEAR FROM sent_date) = '2022'
+group by sender_id
+order by message_count desc
+limit 2;
