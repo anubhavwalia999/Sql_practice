@@ -1,0 +1,13 @@
+SELECT user_id
+FROM emails
+join texts on emails.email_id=texts.email_id
+where EXTRACT(day from action_date)-EXTRACT(day from signup_date)=1
+AND texts.signup_action = 'Confirmed'
+
+-- alt
+SELECT DISTINCT user_id
+FROM emails 
+INNER JOIN texts
+  ON emails.email_id = texts.email_id
+WHERE texts.action_date = emails.signup_date + INTERVAL '1 day'
+  AND texts.signup_action = 'Confirmed';
