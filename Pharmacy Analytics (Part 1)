@@ -1,0 +1,5 @@
+SELECT drug,
+total_sales-cogs as Total_Profit
+FROM pharmacy_sales
+order by Total_Profit desc
+limit 3;
