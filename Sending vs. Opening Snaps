@@ -1,0 +1,11 @@
+SELECT age_breakdown.age_bucket,
+round(100.0*sum(activities.time_spent) filter (where activities.activity_type='send')/
+sum(activities.time_spent),2)as send_perc,
+
+round(100.0*sum(time_spent) filter (where activities.activity_type='open')/
+sum(time_spent),2) as open_perc
+
+FROM activities
+join age_breakdown on activities.user_id=age_breakdown.user_id
+WHERE activities.activity_type in ('send','open')
+group by age_breakdown.age_bucket
