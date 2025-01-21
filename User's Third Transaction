@@ -1,0 +1,9 @@
+with rank_table as (SELECT user_id,spend,transaction_date,
+	RANK () OVER (PARTITION by user_id
+		ORDER BY transaction_date
+	) rank_num
+FROM transactions
+)
+SELECT user_id,spend,transaction_date
+from rank_table
+WHERE rank_num=3
