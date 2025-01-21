@@ -1,0 +1,10 @@
+select count(policy_holder_id) as policy_holder_count
+from
+(SELECT 
+policy_holder_id,
+count(policy_holder_id) as policy_holder_count
+FROM callers
+
+group by policy_holder_id
+HAVING 
+    count(case_id) >= 3) as policy_holder_id
