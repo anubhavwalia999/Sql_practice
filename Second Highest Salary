@@ -1,0 +1,26 @@
+select max(salary) assecond_highest_salary
+FROM employee
+where salary<
+  (SELECT MAX(salary) FROM employee)
+
+
+--using cte
+WITH highest_salary_cte AS (
+  SELECT MAX(salary) AS highest_salary
+  FROM employee
+)
+
+SELECT MAX(salary) AS second_highest_salary
+FROM employee
+WHERE salary < (
+    SELECT highest_salary
+    FROM highest_salary_cte
+);
+-- using rank
+select salary as second_highest_salary
+FROM
+(select  salary,
+rank() over(ORDER by salary DESC) as highest_sal 
+from employee
+) bdhbw
+where highest_sal=2
