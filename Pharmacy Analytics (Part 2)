@@ -1,0 +1,7 @@
+SELECT manufacturer,
+count(drug) as drug,
+ABS(sum(total_sales-cogs)) as Total_loss 
+FROM pharmacy_sales
+WHERE total_sales - cogs <= 0
+group by manufacturer
+order by Total_loss desc
