@@ -1,0 +1,15 @@
+WITH order_counts AS (
+  SELECT COUNT(order_id) AS total_orders 
+  FROM orders
+)
+
+SELECT
+  CASE
+  when order_id%2!=0 AND order_id !=total_orders then order_id+1
+  when order_id%2!=0 and order_id =total_orders then order_id
+  else order_id-1
+end as corrected_order_id,
+item
+FROM orders
+cross JOIN order_counts
+order by corrected_order_id
