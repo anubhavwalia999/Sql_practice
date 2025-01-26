@@ -8,6 +8,13 @@ FROM monthly_cards_issued
 where rank=1
 order by issued_amount desc
 
+-- using first_value
+SELECT DISTINCT card_name, 
+first_value(issued_amount)
+OVER(PARTITION BY card_name ORDER BY make_date(issue_year,issue_month,'01')) as amount
+FROM monthly_cards_issued
+ORDER BY amount DESC;
+
 -- using min()
 WITH card_launch AS (
   SELECT 
