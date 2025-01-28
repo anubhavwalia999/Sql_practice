@@ -1,0 +1,7 @@
+SELECT
+round(sum(case when call_category is NULL or call_category='n/a' 
+then 1 
+else 0
+end)
+*100.0/count(*),1) AS uncategorised_call_pct
+FROM callers 
